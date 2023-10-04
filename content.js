@@ -13,7 +13,9 @@ function hideBlockedUsers() {
 
 // ブロックボタンをクリックしたときの動作
 function blockUser(event) {
+  console.log("Block button clicked!"); // この行を追加
   let username = event.target.getAttribute("data-block-user");
+  console.log("Username to block:", username); // この行を追加
   let blockedUsers = JSON.parse(localStorage.getItem("blockedUsers") || "[]");
   if (!blockedUsers.includes(username)) {
     blockedUsers.push(username);
@@ -50,11 +52,20 @@ function observeMutations(mutationsList, observer) {
 }
 
 // MutationObserverの初期化
-let targetNode = document.body; // ページ全体を監視対象とする
-let config = { attributes: false, childList: true, subtree: true }; // subtreeをtrueに変更
-let observer = new MutationObserver(observeMutations);
-observer.observe(targetNode, config);
+function initialize() {
+  // MutationObserverの初期化
+  let targetNode = document.body; // ページ全体を監視対象とする
+  let config = { attributes: false, childList: true, subtree: true }; // subtreeをtrueに変更
+  let observer = new MutationObserver(observeMutations);
+  observer.observe(targetNode, config);
 
-// 初期化
-hideBlockedUsers();
-addBlockButtons();
+  // 初期化
+  hideBlockedUsers();
+  addBlockButtons();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initialize);
+} else {
+  initialize();
+}
