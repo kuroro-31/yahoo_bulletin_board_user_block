@@ -46,7 +46,8 @@ function addBlockButtons() {
 function observeMutations(mutationsList, observer) {
   for (let mutation of mutationsList) {
     if (mutation.type === "childList") {
-      addBlockButtons();
+      addBlockButtons(); // ブロックボタンを新しい投稿に追加
+      hideBlockedUsers(); // 新しい投稿に対してブロックユーザーを非表示にする
     }
   }
 }
