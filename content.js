@@ -44,18 +44,14 @@ function addBlockButtons() {
 function observeMutations(mutationsList, observer) {
   for (let mutation of mutationsList) {
     if (mutation.type === "childList") {
-      for (let addedNode of mutation.addedNodes) {
-        if (addedNode.nodeName === "LI") {
-          addBlockButtons();
-        }
-      }
+      addBlockButtons();
     }
   }
 }
 
 // MutationObserverの初期化
-let targetNode = document.querySelector("#cmtlst ul");
-let config = { attributes: false, childList: true, subtree: false };
+let targetNode = document.body; // ページ全体を監視対象とする
+let config = { attributes: false, childList: true, subtree: true }; // subtreeをtrueに変更
 let observer = new MutationObserver(observeMutations);
 observer.observe(targetNode, config);
 
