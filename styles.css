@@ -1,0 +1,12 @@
+.block-btn {
+  background-color: #f44336;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 8px;
+}
+.block-btn:hover {
+  background-color: #d32f2f;
+}

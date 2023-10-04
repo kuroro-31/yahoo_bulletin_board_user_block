@@ -25,13 +25,15 @@ function blockUser(event) {
 // 各投稿にブロックボタンを追加する関数
 function addBlockButtons() {
   let posts = document.querySelectorAll(
-    "p.comWriter a:not([data-block-button-added])"
+    "p.comWriter a[data-user]:not([data-block-button-added])"
   );
   posts.forEach((post) => {
     let username = post.getAttribute("data-user");
+    if (!username) return; // data-userがない場合はスキップ
     let blockButton = document.createElement("button");
     blockButton.textContent = "ブロック";
     blockButton.setAttribute("data-block-user", username);
+    blockButton.classList.add("block-btn"); // block-btnクラスを追加
     blockButton.addEventListener("click", blockUser);
     post.parentNode.insertBefore(blockButton, post.nextSibling);
     post.setAttribute("data-block-button-added", "true");

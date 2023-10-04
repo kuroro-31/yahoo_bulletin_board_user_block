@@ -7,7 +7,8 @@
   "content_scripts": [
     {
       "matches": ["https://finance.yahoo.co.jp/*"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "css": ["styles.css"]
     }
   ]
 }
