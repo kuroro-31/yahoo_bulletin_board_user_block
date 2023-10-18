@@ -66,7 +66,8 @@ function initialize() {
   addBlockButtons();
 
   // ここでtriggerScrollEventを呼び出す
-  triggerScrollEvent();
+  // スクロールで新しい投稿が読み込まれない不具合の修正
+  setInterval(triggerScrollEvent, 1000);
 
   // MutationObserverの初期化
   let targetNode = document.body; // ページ全体を監視対象とする
