@@ -6,7 +6,10 @@ function hideBlockedUsers() {
       `p.comWriter a[data-user="${username}"]`
     );
     posts.forEach((post) => {
-      post.closest("li").style.display = "none";
+      let parentLi = post.closest("li");
+      if (parentLi) {
+        parentLi.remove();
+      }
     });
   });
 }
@@ -42,6 +45,10 @@ function addBlockButtons() {
   });
 }
 
+function triggerScrollEvent() {
+  window.dispatchEvent(new Event("scroll"));
+}
+
 // MutationObserverのコールバック関数
 function observeMutations(mutationsList, observer) {
   for (let mutation of mutationsList) {
@@ -54,15 +61,18 @@ function observeMutations(mutationsList, observer) {
 
 // MutationObserverの初期化
 function initialize() {
+  // 初期化
+  hideBlockedUsers();
+  addBlockButtons();
+
+  // ここでtriggerScrollEventを呼び出す
+  triggerScrollEvent();
+
   // MutationObserverの初期化
   let targetNode = document.body; // ページ全体を監視対象とする
   let config = { attributes: false, childList: true, subtree: true }; // subtreeをtrueに変更
   let observer = new MutationObserver(observeMutations);
   observer.observe(targetNode, config);
-
-  // 初期化
-  hideBlockedUsers();
-  addBlockButtons();
 }
 
 window.onload = function () {
