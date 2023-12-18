@@ -19,6 +19,7 @@ function blockUser(event) {
   console.log("Block button clicked!"); // この行を追加
   let username = event.target.getAttribute("data-block-user");
   console.log("Username to block:", username); // この行を追加
+
   let blockedUsers = JSON.parse(localStorage.getItem("blockedUsers") || "[]");
   if (!blockedUsers.includes(username)) {
     blockedUsers.push(username);
